@@ -1,5 +1,5 @@
 import tkinter
-import backend
+from backend import *
 
 
 class BarBotApp(tkinter.Tk):
@@ -36,6 +36,15 @@ class MainMenu(tkinter.Frame, BarBotApp):
         self.quit_button.grid(row=4, column=2)
 
 
+class CocktailButton(tkinter.Button):
+    def __init__(self, master, cocktail):
+        self.cocktail = cocktail
+        tkinter.Button.__init__(self, master, text=self.cocktail, command=lambda: self.make_cocktail())
+
+    def make_cocktail(self):
+        print(self.cocktail)
+
+
 class ChooseCocktail(tkinter.Frame, BarBotApp):
     def __init__(self, master):
         self.master = master
@@ -60,12 +69,10 @@ class ChooseCocktail(tkinter.Frame, BarBotApp):
     def populate(self):
         cocktail_buttons = {}
         for cocktail in COCKTAILS.keys():
-            cocktail_buttons[cocktail] = tkinter.Button(self.cocktail_list, text=cocktail,
-                                                        command=Make(cocktail))
+            cocktail_buttons[cocktail] = CocktailButton(self.cocktail_list, cocktail)
+            print(id(cocktail))
             print(cocktail_buttons[cocktail]['command'])
-            cocktail_buttons[cocktail].configure(command=lambda: cocktail_buttons[cocktail]['command'].print_cocktail())
             cocktail_buttons[cocktail].pack(side='bottom', fill='both')
-            print(cocktail_buttons[cocktail]['command'])
             print(cocktail_buttons[cocktail]['text'])
 
         print(cocktail_buttons)
