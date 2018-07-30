@@ -1,5 +1,5 @@
 import tkinter
-from barbotstuff import *
+import backend
 
 
 class BarBotApp(tkinter.Tk):
